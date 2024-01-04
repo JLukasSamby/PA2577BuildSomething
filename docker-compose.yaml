@@ -1,0 +1,73 @@
+version: '3'
+services:
+  mongodb-service:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - backend-network
+
+  verification:
+    build:
+      context: ./verification
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - SECRET_KEY=secret
+    networks:
+      - backend-network
+
+  verification-dev:
+    build:
+      context: ./verification
+    command: npm run dev
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - SECRET_KEY=secret
+    volumes:
+      - ./verification/src:/app/src
+    networks:
+      - backend-network
+
+  umas:
+    build:
+      context: ./umas
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb-service
+      - verification
+    environment:
+      - MONGO_URL=mongodb://mongodb-service:27017/userdb
+      - VERIFICATION_SERVICE_URL=http://verification:4000
+      - SECRET_KEY=secret
+    networks:
+      - backend-network
+
+  umas-dev:
+    build:
+      context: ./umas
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb-service
+      - verification-dev
+    environment:
+      - MONGO_URL=mongodb://mongodb-service:27017/userdb
+      - VERIFICATION_SERVICE_URL=http://verification-dev:4000
+      - SECRET_KEY=secret
+    volumes:
+      - ./umas/src:/app/src
+    networks:
+      - backend-network
+
+networks:
+  backend-network:

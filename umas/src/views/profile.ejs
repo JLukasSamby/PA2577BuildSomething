@@ -1,0 +1,21 @@
+<!-- views/profile.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Profile</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>User Profile</h1>
+  </header>
+  <main>
+    <p><strong>Username:</strong> <%= user.username %></p>
+    <p><strong>Name:</strong> <%= user.name %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <a href="/">Back to Home</a>
+  </main>
+</body>
+</html>

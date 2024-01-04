@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verification-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: verification
+  template:
+    metadata:
+      labels:
+        app: verification
+    spec:
+      containers:
+        - name: verification-container
+          image: your-verification-image:latest  # Replace with your actual image name
+          ports:
+            - containerPort: 4000
+              name: verification
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: verification-service
+spec:
+  selector:
+    app: verification
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umas-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: umas
+  template:
+    metadata:
+      labels:
+        app: umas
+    spec:
+      containers:
+        - name: umas-container
+          image: your-umas-image:latest  # Replace with your actual image name
+          ports:
+            - containerPort: 3000
+              name: umas
+          env:
+            - name: MONGO_URL
+              value: "mongodb://mongodb-service:27017/userdb"
+            - name: VERIFICATION_SERVICE_URL
+              value: "http://verification-service:4000"
+            - name: SECRET_KEY
+              value: "secret"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: umas-service
+spec:
+  selector:
+    app: umas
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
