@@ -7,8 +7,10 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "./storage"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

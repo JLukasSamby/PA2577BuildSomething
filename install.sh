@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define your Docker image names
-VERIFICATION_IMAGE="your-verification-image:latest"
-UMAS_IMAGE="your-umas-image:latest"
+VERIFICATION_IMAGE="jlukassamby/verification:latest"
+UMAS_IMAGE="jlukassamby/umas:latest"
 
 # Function to check if a command is available
 command_exists() {

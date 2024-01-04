@@ -20,5 +20,5 @@ EXPOSE 3000
 ENV MONGO_URL mongodb://localhost:27017/userdb
 
 # Run app.js when the container launches
-CMD ["node", "./index.js"]
+CMD ["node", "./src/index.js"]
 

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: verification-container
-          image: your-verification-image:latest  # Replace with your actual image name
+          image: jlukassamby/verification:latest
           ports:
             - containerPort: 4000
               name: verification

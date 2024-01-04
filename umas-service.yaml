@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: umas-container
-          image: your-umas-image:latest  # Replace with your actual image name
+          image: jlukassamby/umas:latest
           ports:
             - containerPort: 3000
               name: umas
