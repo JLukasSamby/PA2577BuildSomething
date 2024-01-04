@@ -28,11 +28,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript generated files
-*.js
-*.js.map
-*.d.ts
-
 # Optional npm package files
 **/*.npm
 
